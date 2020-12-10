@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game CANVAS</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button id="rules-btn" class="btn rules-btn">Show Rules</button>
+    <div class="rules-container" id="rules-container">
+      <div id="rules" class="rules">
+        <h2>How To Play</h2>
+        <p>
+          Use your right and left keys to move the paddle to bounce the ball up
+          and break the blocks
+        </p>
+        <p>If you miss the ball, your score and the blocks will reset.</p>
+        <button id="close-btn" class="btn">Close</button>
+      </div>
+    </div>
+    <div id="game" class="game">
+      <h1>Breakout Game!</h1>
+      <div id="game-des" class="game-des">
+        <p>
+          Welcome to Breakout Web Game using Canvas API! <br />Click on the
+          <span>Show Rules</span> button on the top right side to see the
+          instructions
+        </p>
+        <p>Let's Play!</p>
+        <button id="play-btn" class="btn play-btn">Play Game</button>
+      </div>
+    </div>
+
+    <div id="canvas-container" class="canvas-container">
+      <h1>Destroy All The Bricks!</h1>
+      <canvas id="canvas" class="canvas" width="800" height="600"></canvas>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
