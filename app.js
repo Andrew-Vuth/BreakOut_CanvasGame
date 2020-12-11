@@ -54,9 +54,9 @@ function breakOutGame() {
   };
   // -------> Paddle prop <--------
   const paddle = {
-    x: canvas.width / 2 - 40,
+    x: canvas.width / 2 - 50,
     y: canvas.height - 30,
-    w: 700,
+    w: 100,
     h: 10,
     dx: 0,
     speed: 8,
