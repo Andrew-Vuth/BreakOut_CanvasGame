@@ -1,6 +1,9 @@
 // ------> Initialization <----------
 
 let score = 0;
+let lives = 3;
+let req;
+
 const brickRows = 5;
 const brickCols = 9;
 
@@ -9,11 +12,13 @@ const brickCols = 9;
 const rulesBtn = document.getElementById("rules-btn");
 const closeBtn = document.getElementById("close-btn");
 const playBtn = document.getElementById("play-btn");
+const loseBtn = document.getElementById("lose-btn");
 
 // --------> DOM <----------
 
 const rulesContainer = document.getElementById("rules-container");
 const game = document.getElementById("game");
+const lose = document.getElementById("lose");
 const canvasContainer = document.getElementById("canvas-container");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -34,8 +39,16 @@ window.addEventListener("click", (e) => {
 playBtn.addEventListener("click", () => {
   game.classList.add("hide");
   canvasContainer.classList.add("show");
+
   breakOutGame();
+
   // setTimeout(breakOutGame, 1000);
+});
+loseBtn.addEventListener("click", () => {
+  lose.classList.remove("show");
+  canvasContainer.classList.add("show");
+
+  breakOutGame();
 });
 
 //-------- THE GAME FUCNTION -----------
@@ -48,9 +61,9 @@ function breakOutGame() {
     x: canvas.width / 2,
     y: canvas.height / 2,
     size: 10,
-    dx: 4,
-    dy: 4,
-    speed: 10,
+    dx: 5,
+    dy: 5,
+    speed: 6,
   };
   // -------> Paddle prop <--------
   const paddle = {
@@ -103,6 +116,13 @@ function breakOutGame() {
     ctx.beginPath();
     ctx.font = "20px Product Sans";
     ctx.fillText(`Score: ${score}`, canvas.width - 100, 40);
+    ctx.closePath();
+  }
+  // --------> Draw Lives <--------
+  function drawLives() {
+    ctx.beginPath();
+    ctx.font = "20px Product Sans";
+    ctx.fillText(`Lives: ${lives}`, 45, 40);
     ctx.closePath();
   }
   // --------> Draw Bricks <-------
@@ -178,6 +198,8 @@ function breakOutGame() {
       });
     });
     if (ball.y + ball.size > canvas.height) {
+      lives--;
+      console.log(lives);
       score = 0;
       showAllBricks();
     }
@@ -202,6 +224,7 @@ function breakOutGame() {
     drawBall();
     drawPaddle();
     drawScore();
+    drawLives();
     drawBricks();
   }
 
@@ -210,8 +233,20 @@ function breakOutGame() {
     moveBall();
     draw();
 
-    requestAnimationFrame(updateCanvas);
+    req = requestAnimationFrame(updateCanvas);
+    if (lives == 0) {
+      closeGame();
+    }
   }
-
+  function closeGame() {
+    cancelAnimationFrame(req);
+    setTimeout(() => {
+      canvasContainer.classList.remove("show");
+      setTimeout(() => {
+        lose.classList.add("show");
+      }, 100);
+    }, 300);
+    lives = 3;
+  }
   updateCanvas();
 }
