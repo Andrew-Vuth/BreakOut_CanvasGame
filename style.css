@@ -98,6 +98,11 @@ h1 {
 .rules-container.show {
   transform: translateX(0);
 }
+.lose {
+  position: absolute;
+  opacity: 0;
+  display: none;
+}
 .game.hide {
   opacity: 0;
   display: none;
@@ -105,4 +110,8 @@ h1 {
 .canvas-container.show {
   opacity: 1;
   pointer-events: all;
+}
+.lose.show {
+  opacity: 1;
+  display: block;
 }
